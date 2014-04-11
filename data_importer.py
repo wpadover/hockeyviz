@@ -1,4 +1,5 @@
 import urllib.request
+from pymongo import MongoClient
 from bs4 import BeautifulSoup
 
 page = urllib.request.urlopen("http://www.extraskater.com/players/standard?team=nyr&season=2013&sit=all").read()
@@ -18,20 +19,27 @@ print(stats)
 print("Skipping " + str(stat_skip_count) + " stats")
 
 PLAYER_NAME_COL = 1
-players = {}
+players = []
 for tr in soup.table.tbody.find_all('tr'):
   col_counter = 0
   stat_counter = 0
-  player = ''
+  this_player = {}
   for td in tr.find_all('td'):
     if col_counter == PLAYER_NAME_COL:
       player = td.a.contents[0]
-      players[player] = {}
+      this_player['player'] = player
       print("Finding stats for: " + player)
     if col_counter >= stat_skip_count:
       this_stat = td.contents[0]
-      players[player][stats[stat_counter]['stat']] = this_stat
+      this_player[stats[stat_counter]['stat']] = this_stat
       stat_counter +=1
     col_counter +=1
+  players.append(this_player)
 
 print(players)
+
+client = MongoClient()
+db = client['hockeyvizdb']
+player_stats = db['playerstats']
+for player in players:
+  player_stats.insert(player)
