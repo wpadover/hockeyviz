@@ -1,6 +1,6 @@
 var request = require('request');
 var cheerio = require('cheerio');
-var Player = require('../models/player.js');
+var Player = require('../app/models/player.js');
 var _ = require("underscore");
 var mongoose = require("mongoose");
 
