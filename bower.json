@@ -1,0 +1,11 @@
+{
+  "name":"hockeyviz",
+  "version":"0.0.1",
+  "dependencies":{
+    "font-awesome" : "latest",
+    "animate.css": "latest",
+    "angular": "latest",
+    "angular-route": "latest",
+    "bootstrap": "latest"
+  }
+}
