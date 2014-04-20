@@ -43,11 +43,11 @@ request("http://www.extraskater.com/players/standard?team=nyr&season=2013&sit=al
     "A1" : "primaryAssists",
     "A2" : "secondaryAssists",
     "P1" : "primaryPoints",
-    "TOI/60": "atoiper60",
+    "TOI/60": "atoiPer60",
     "S" : "shots",
     "MS" : "missedShots",
-    "BS" : "blockedShots",
-    "CF" : "corsfiFor",
+    "BS" : "blockedShotsFor",
+    "CF" : "corsiFor",
     "FF" : "fenwickFor",
     "FOW" : "faceoffsWon",
     "FOL" : "faceoffsLost",
@@ -58,7 +58,7 @@ request("http://www.extraskater.com/players/standard?team=nyr&season=2013&sit=al
     "ShB" : "shotsAgainstBlocked",
     "HitF" : "hitsFor",
     "HitA" : "hitsAgainst",
-    "Hit +/-" : "hitPlusMinus"
+    "Hit +/-" : "hitsPlusMinus"
   }
   //Find our players
   $("table tbody tr").each(function(rIndex){
@@ -84,10 +84,12 @@ request("http://www.extraskater.com/players/standard?team=nyr&season=2013&sit=al
     var playerObject = player.toObject();
     delete playerObject._id;
     Player.update({name: player.name}, playerObject, {upsert: true}, function(err){
-      if (err) throw err;
+      if (err){
+        throw err;
+      } else {
+        console.log("Persisted " + player);
+      }
     });
-    console.log(player);
   });
-  process.exit(0);
 });
 

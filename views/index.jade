@@ -1,5 +1,83 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+    nav.navbar.navbar-inverse.navbar-fixed-top
+      div.navbar-header
+        a.navbar-brand(href="/")=title
+    h1="Hockey Data Visualizations"
+    div#player-list.row(ng-controller="PlayerListController")
+      table.table
+        tr
+          td="Player"
+          td="Games Played"
+          td="G"
+          td="A"
+          td="P"
+          td="A1"
+          td="A2"
+          td="P1"
+          td="TOI/60"
+          td="S"
+          td="MS"
+          td="BS"
+          td="CF"
+          td="FF"
+          td="FOW"
+          td="FOL"
+          td="FO %"
+          td="Pen"
+          td="PenD"
+          td="Pen +/-"
+          td="ShB"
+          td="HitF"
+          td="HitA"
+          td="Hit +/-"
+        tr(ng-repeat="player in players")
+          td.
+            {{player.name}}
+          td.
+            {{player.gamesPlayed}}
+          td.
+            {{player.goals}}
+          td.
+            {{player.assists}}
+          td.
+            {{player.points}}
+          td.
+            {{player.primaryAssists}}
+          td.
+            {{player.secondaryAssists}}
+          td.
+            {{player.primaryPoints}}
+          td.
+            {{player.atoiPer60}}
+          td.
+            {{player.shots}}
+          td.
+            {{player.missedShots}}
+          td.
+            {{player.blockedShotsFor}}
+          td.
+            {{player.corsiFor}}
+          td.
+            {{player.fenwickFor}}
+          td.
+            {{player.faceoffsWon}}
+          td.
+            {{player.faceoffsLost}}
+          td.
+            {{player.faceoffPercentage}}
+          td.
+            {{player.penaltiesTaken}}
+          td.
+            {{player.penaltiesDrawn}}
+          td.
+            {{player.penaltyPlusMinus}}
+          td.
+            {{player.shotsAgainstBlocked}}
+          td.
+            {{player.hitsFor}}
+          td.
+            {{player.hitsAgainst}}
+          td.
+            {{player.hitsPlusMinus}}
