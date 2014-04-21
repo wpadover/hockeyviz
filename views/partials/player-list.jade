@@ -1,0 +1,82 @@
+div.container-fluid
+  h1="Hockey Data Visualizations"
+  div#player-list.row
+    div.row
+      label="Filter Players"
+      input(ng-model="name")
+    table.table
+      tr
+        td="Player"
+        td="GP"
+        td="G"
+        td="A"
+        td="P"
+        td="A1"
+        td="A2"
+        td="P1"
+        td="TOI/60"
+        td="S"
+        td="MS"
+        td="BS"
+        td="CF"
+        td="FF"
+        td="FOW"
+        td="FOL"
+        td="FO %"
+        td="Pen"
+        td="PenD"
+        td="Pen +/-"
+        td="ShB"
+        td="HitF"
+        td="HitA"
+        td="Hit +/-"
+      tr(ng-repeat="player in players | filter: name")
+        td
+          a(href="#/players/{{player._id}}")
+            {{player.name}}
+        td.
+          {{player.gamesPlayed}}
+        td.
+          {{player.goals}}
+        td.
+          {{player.assists}}
+        td.
+          {{player.points}}
+        td.
+          {{player.primaryAssists}}
+        td.
+          {{player.secondaryAssists}}
+        td.
+          {{player.primaryPoints}}
+        td.
+          {{player.atoiPer60}}
+        td.
+          {{player.shots}}
+        td.
+          {{player.missedShots}}
+        td.
+          {{player.blockedShotsFor}}
+        td.
+          {{player.corsiFor}}
+        td.
+          {{player.fenwickFor}}
+        td.
+          {{player.faceoffsWon}}
+        td.
+          {{player.faceoffsLost}}
+        td.
+          {{player.faceoffPercentage}}
+        td.
+          {{player.penaltiesTaken}}
+        td.
+          {{player.penaltiesDrawn}}
+        td.
+          {{player.penaltyPlusMinus}}
+        td.
+          {{player.shotsAgainstBlocked}}
+        td.
+          {{player.hitsFor}}
+        td.
+          {{player.hitsAgainst}}
+        td.
+          {{player.hitsPlusMinus}}

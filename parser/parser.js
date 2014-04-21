@@ -3,6 +3,7 @@ var cheerio = require('cheerio');
 var Player = require('../app/models/player.js');
 var _ = require("underscore");
 var mongoose = require("mongoose");
+var async = require('async');
 
 request("http://www.extraskater.com/players/standard?team=nyr&season=2013&sit=all", function(err, resp, body) {
   if (err)
@@ -61,6 +62,7 @@ request("http://www.extraskater.com/players/standard?team=nyr&season=2013&sit=al
     "Hit +/-" : "hitsPlusMinus"
   }
   //Find our players
+  var calls = [];
   $("table tbody tr").each(function(rIndex){
     var thisPlayer = {};
     var statCounter = 0;
@@ -83,13 +85,19 @@ request("http://www.extraskater.com/players/standard?team=nyr&season=2013&sit=al
     var player = new Player(thisPlayer);
     var playerObject = player.toObject();
     delete playerObject._id;
-    Player.update({name: player.name}, playerObject, {upsert: true}, function(err){
-      if (err){
-        throw err;
-      } else {
-        console.log("Persisted " + player);
-      }
+    calls.push(function(callback){
+      Player.update({name: player.name}, playerObject, {upsert: true}, function(err){
+        if (err){
+          throw err;
+        } else {
+          console.log("Persisted " + player);
+          callback(null);
+        }
+      });
     });
+  });
+  async.parallel(calls, function(err, result){
+    mongoose.disconnect();
   });
 });
 
