@@ -7,5 +7,6 @@
     "angular": "latest",
     "angular-route": "latest",
     "bootstrap": "latest",
+    "angular-resource": "latest"
   }
 }

@@ -1,6 +1,7 @@
 var hockeyvizApp = angular.module('hockeyvizApp', [
   'ngRoute',
-  'hockeyvizControllers'
+  'hockeyvizControllers',
+  'hockeyvizServices'
   ]);
 
 hockeyvizApp.config(['$routeProvider',
