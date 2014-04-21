@@ -3,8 +3,10 @@ div#player-list.row
   div.row
     table.table
       tr
-        th=Player
-          input(ng-model="name", placeholder="Filter Players")
+        th
+          input(ng-model="name", placeholder="Player Name")
+        th
+          input(ng-model="team", placeholder="Team")
         th
           a(href="", ng-click="predicate='gamesPlayed'; reverse=!reverse").
             GP
@@ -75,10 +77,13 @@ div#player-list.row
           a(href="", ng-click="predicate='hitsPlusMinus'; reverse=!reverse").
             Hit +/-
 
-      tr(ng-repeat="player in players | filter: name | orderBy:predicate:reverse")
+      tr(ng-repeat="player in players | filter: {name: name, team: team} | orderBy:predicate:reverse")
         td
           a(href="#/players/{{player._id}}")
             {{player.name}}
+        td
+          a(href="#/players?team={{player.team}}")
+            {{player.team}}
         td.
           {{player.gamesPlayed}}
         td.

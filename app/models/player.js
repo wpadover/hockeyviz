@@ -4,6 +4,7 @@ var mongoose = require('mongoose')
 
 var playerSchema = new Schema({
   name: String,
+  team: String,
   gamesPlayed: Number,
   goals: Number,
   assists: Number, 
