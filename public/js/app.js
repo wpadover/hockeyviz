@@ -15,7 +15,11 @@ hockeyvizApp.config(['$routeProvider',
         templateUrl: 'partials/player-detail.jade',
         controller: 'PlayerDetailController'
       }).
+      when('/teams', {
+        templateUrl: '/partials/team-list.jade',
+        controller: 'TeamListController'
+      }).
       otherwise({
-        redirectTo: '/players'
+        redirectTo: '/teams'
       })
   }]);

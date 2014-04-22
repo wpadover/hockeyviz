@@ -6,84 +6,79 @@ div#player-list.row
         th
           input(ng-model="name", placeholder="Player Name")
         th
-          input(ng-model="team", placeholder="Team")
-        th
-          a(href="", ng-click="predicate='gamesPlayed'; reverse=!reverse").
+          a(href="", ng-click="reverse = predicate == 'gamesPlayed' && !reverse; predicate='gamesPlayed'").
             GP
         th
-          a(href="", ng-click="predicate='goals'; reverse=!reverse").
+          a(href="", ng-click="reverse = predicate == 'goals' && !reverse; predicate='goals'").
             G
         th
-          a(href="", ng-click="predicate='assists'; reverse=!reverse").
+          a(href="", ng-click="reverse = predicate == 'assists' && !reverse; predicate='assists'").
             A
         th
-          a(href="", ng-click="predicate='points'; reverse=!reverse").
+          a(href="", ng-click="reverse = predicate == 'points' && !reverse; predicate='points'").
             P
         th
-          a(href="", ng-click="predicate='primaryAssists'; reverse=!reverse").
+          a(href="", ng-click="reverse = predicate == 'primaryAssists' && !reverse; predicate='primaryAssists'").
             A1
         th
-          a(href="", ng-click="predicate='secondaryAssists'; reverse=!reverse").
+          a(href="", ng-click="reverse = predicate == 'secondaryAssists' && !reverse; predicate='secondaryAssists'").
             A2
         th
-          a(href="", ng-click="predicate='primaryPoints'; reverse=!reverse").
+          a(href="", ng-click="reverse = predicate == 'primaryPoints' && !reverse; predicate='primaryPoints'").
             P1
         th
-          a(href="", ng-click="predicate='atoiPer60'; reverse=!reverse").
+          a(href="", ng-click="reverse = predicate == 'atoiPer60' && !reverse; predicate='atoiPer60'").
             TOI/60
         th
-          a(href="", ng-click="predicate='shots'; reverse=!reverse").
+          a(href="", ng-click="reverse = predicate == 'shots' && !reverse; predicate='shots'").
             S
         th
-          a(href="", ng-click="predicate='missedShots'; reverse=!reverse").
+          a(href="", ng-click="reverse = predicate == 'missedShots' && !reverse; predicate='missedShots'").
             MS
         th
-          a(href="", ng-click="predicate='blockedShotsFor'; reverse=!reverse").
+          a(href="", ng-click="reverse = predicate == 'blockedShotsFor' && !reverse; predicate='blockedShotsFor'").
             BS
         th
-          a(href="", ng-click="predicate='corsiFor'; reverse=!reverse").
+          a(href="", ng-click="reverse = predicate == 'corsiFor' && !reverse; predicate='corsiFor'").
             CF
         th
-          a(href="", ng-click="predicate='fenwickFor'; reverse=!reverse").
+          a(href="", ng-click="reverse = predicate == 'fenwickFor' && !reverse; predicate='fenwickFor'").
             FF
         th
-          a(href="", ng-click="predicate='faceoffsWon'; reverse=!reverse").
+          a(href="", ng-click="reverse = predicate == 'faceoffsWon' && !reverse; predicate='faceoffsWon'").
             FOW
         th
-          a(href="", ng-click="predicate='faceoffsLost'; reverse=!reverse").
+          a(href="", ng-click="reverse = predicate == 'faceoffsLost' && !reverse; predicate='faceoffsLost'").
             FOL
         th
-          a(href="", ng-click="predicate='faceoffPercentage'; reverse=!reverse").
+          a(href="", ng-click="reverse = predicate == 'faceoffPercentage' && !reverse; predicate='faceoffPercentage'").
             FO %
         th
-          a(href="", ng-click="predicate='penaltiesTaken'; reverse=!reverse").
+          a(href="", ng-click="reverse = predicate == 'penaltiesTaken' && !reverse; predicate='penaltiesTaken'").
             Pen
         th
-          a(href="", ng-click="predicate='penaltiesDrawn'; reverse=!reverse").
+          a(href="", ng-click="reverse = predicate == 'penaltiesDrawn' && !reverse; predicate='penaltiesDrawn'").
             PenD
         th
-          a(href="", ng-click="predicate='penaltyPlusMinus'; reverse=!reverse").
+          a(href="", ng-click="reverse = predicate == 'penaltyPlusMinus' && !reverse; predicate='penaltyPlusMinus'").
             Pen +/-
         th
-          a(href="", ng-click="predicate='shotsAgainstBlocked'; reverse=!reverse").
+          a(href="", ng-click="reverse = predicate == 'shotsAgainstBlocked' && !reverse; predicate='shotsAgainstBlocked'").
             ShB
         th
-          a(href="", ng-click="predicate='hitsFor'; reverse=!reverse").
+          a(href="", ng-click="reverse = predicate == 'hitsFor' && !reverse; predicate='hitsFor'").
             HitF
         th
-          a(href="", ng-click="predicate='hitsAgainst'; reverse=!reverse").
+          a(href="", ng-click="reverse = predicate == 'hitsAgainst' && !reverse; predicate='hitsAgainst'").
             HitA
         th
-          a(href="", ng-click="predicate='hitsPlusMinus'; reverse=!reverse").
+          a(href="", ng-click="reverse = predicate == 'hitsPlusMinus' && !reverse; predicate='hitsPlusMinus'").
             Hit +/-
 
-      tr(ng-repeat="player in players | filter: {name: name, team: team} | orderBy:predicate:reverse")
+      tr(ng-repeat="player in players | filter: {name: name, team: team} | orderBy:predicate:!reverse")
         td
           a(href="#/players/{{player._id}}")
             {{player.name}}
-        td
-          a(href="#/players?team={{player.team}}")
-            {{player.team}}
         td.
           {{player.gamesPlayed}}
         td.
