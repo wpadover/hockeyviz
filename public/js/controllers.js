@@ -2,6 +2,26 @@ var hockeyvizControllers = angular.module('hockeyvizControllers', []);
 
 hockeyvizControllers.controller('PlayerListController', ['$scope', '$routeParams', 'Player', function($scope, $routeParams, Player){
   $scope.players = Player.query({team: $routeParams.team});
+  
+  $scope.sort = {
+    column: "gamesPlayed",
+    descending: true
+  };
+  
+  $scope.selectedCls = function(column){
+    return column == $scope.sort.column && 'sort-' + $scope.sort.descending;
+  };
+  
+  $scope.changeSorting = function(column){
+    var sort = $scope.sort;
+    if (sort.column == column){
+      sort.descending = ! sort.descending;
+    } else {
+      sort.column = column;
+      sort.descending = true;
+    }
+  };  
+
 }]);
 
 hockeyvizControllers.controller('PlayerDetailController',

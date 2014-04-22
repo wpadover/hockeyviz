@@ -1,81 +1,81 @@
+link(rel='stylesheet', href='/stylesheets/player-list.css')
 h1="Hockey Data Visualizations"
 div#player-list.row
   div.row
     table.table
       tr
         th
-          input(ng-model="name", placeholder="Player Name")
+          input(ng-model="name", placeholder="Player Name")#playerName
         th
-          a(href="", ng-click="reverse = predicate == 'gamesPlayed' && !reverse; predicate='gamesPlayed'").
+          a(href="", ng-click="changeSorting('gamesPlayed')" ng-class="selectedCls('gamesPlayed')").
             GP
         th
-          a(href="", ng-click="reverse = predicate == 'goals' && !reverse; predicate='goals'").
+          a(href="", ng-click="changeSorting('goals')" ng-class="selectedCls('goals')").
             G
         th
-          a(href="", ng-click="reverse = predicate == 'assists' && !reverse; predicate='assists'").
+          a(href="", ng-click="changeSorting('assists')" ng-class="selectedCls('assists')").
             A
         th
-          a(href="", ng-click="reverse = predicate == 'points' && !reverse; predicate='points'").
+          a(href="", ng-click="changeSorting('points')" ng-class="selectedCls('points')").
             P
         th
-          a(href="", ng-click="reverse = predicate == 'primaryAssists' && !reverse; predicate='primaryAssists'").
+          a(href="", ng-click="changeSorting('primaryAssists')" ng-class="selectedCls('primaryAssists')").
             A1
         th
-          a(href="", ng-click="reverse = predicate == 'secondaryAssists' && !reverse; predicate='secondaryAssists'").
+          a(href="", ng-click="changeSorting('secondaryAssists')" ng-class="selectedCls('secondaryAssists')").
             A2
         th
-          a(href="", ng-click="reverse = predicate == 'primaryPoints' && !reverse; predicate='primaryPoints'").
+          a(href="", ng-click="changeSorting('primaryPoints')" ng-class="selectedCls('primaryPoints')").
             P1
         th
-          a(href="", ng-click="reverse = predicate == 'atoiPer60' && !reverse; predicate='atoiPer60'").
+          a(href="", ng-click="changeSorting('atoiPer60')" ng-class="selectedCls('atoiPer60')").
             TOI/60
         th
-          a(href="", ng-click="reverse = predicate == 'shots' && !reverse; predicate='shots'").
+          a(href="", ng-click="changeSorting('shots')" ng-class="selectedCls('shots')").
             S
         th
-          a(href="", ng-click="reverse = predicate == 'missedShots' && !reverse; predicate='missedShots'").
+          a(href="", ng-click="changeSorting('missedShots')" ng-class="selectedCls('missedShots')").
             MS
         th
-          a(href="", ng-click="reverse = predicate == 'blockedShotsFor' && !reverse; predicate='blockedShotsFor'").
+          a(href="", ng-click="changeSorting('blockedShotsFor')" ng-class="selectedCls('blockedShotsFor')").
             BS
         th
-          a(href="", ng-click="reverse = predicate == 'corsiFor' && !reverse; predicate='corsiFor'").
+          a(href="", ng-click="changeSorting('corsiFor')" ng-class="selectedCls('corsiFor')").
             CF
         th
-          a(href="", ng-click="reverse = predicate == 'fenwickFor' && !reverse; predicate='fenwickFor'").
+          a(href="", ng-click="changeSorting('fenwickFor')" ng-class="selectedCls('fenwickFor')").
             FF
         th
-          a(href="", ng-click="reverse = predicate == 'faceoffsWon' && !reverse; predicate='faceoffsWon'").
+          a(href="", ng-click="changeSorting('faceoffsWon')" ng-class="selectedCls('faceoffsWon')").
             FOW
         th
-          a(href="", ng-click="reverse = predicate == 'faceoffsLost' && !reverse; predicate='faceoffsLost'").
+          a(href="", ng-click="changeSorting('faceoffsLost')" ng-class="selectedCls('faceoffsLost')").
             FOL
         th
-          a(href="", ng-click="reverse = predicate == 'faceoffPercentage' && !reverse; predicate='faceoffPercentage'").
+          a(href="", ng-click="changeSorting('faceoffPercentage')" ng-class="selectedCls('faceoffPercentage')").
             FO %
         th
-          a(href="", ng-click="reverse = predicate == 'penaltiesTaken' && !reverse; predicate='penaltiesTaken'").
+          a(href="", ng-click="changeSorting('penaltiesTaken')" ng-class="selectedCls('penaltiesTaken')").
             Pen
         th
-          a(href="", ng-click="reverse = predicate == 'penaltiesDrawn' && !reverse; predicate='penaltiesDrawn'").
+          a(href="", ng-click="changeSorting('penaltiesDrawn')" ng-class="selectedCls('penaltiesDrawn')").
             PenD
         th
-          a(href="", ng-click="reverse = predicate == 'penaltyPlusMinus' && !reverse; predicate='penaltyPlusMinus'").
+          a(href="", ng-click="changeSorting('penaltyPlusMinus')" ng-class="selectedCls('penaltyPlusMinus')").
             Pen +/-
         th
-          a(href="", ng-click="reverse = predicate == 'shotsAgainstBlocked' && !reverse; predicate='shotsAgainstBlocked'").
+          a(href="", ng-click="changeSorting('shotsAgainstBlocked')" ng-class="selectedCls('shotsAgainstBlocked')").
             ShB
         th
-          a(href="", ng-click="reverse = predicate == 'hitsFor' && !reverse; predicate='hitsFor'").
+          a(href="", ng-click="changeSorting('hitsFor')" ng-class="selectedCls('hitsFor')").
             HitF
         th
-          a(href="", ng-click="reverse = predicate == 'hitsAgainst' && !reverse; predicate='hitsAgainst'").
+          a(href="", ng-click="changeSorting('hitsAgainst')" ng-class="selectedCls('hitsAgainst')").
             HitA
         th
-          a(href="", ng-click="reverse = predicate == 'hitsPlusMinus' && !reverse; predicate='hitsPlusMinus'").
+          a(href="", ng-click="changeSorting('hitsPlusMinus')" ng-class="selectedCls('hitsPlusMinus')").
             Hit +/-
-
-      tr(ng-repeat="player in players | filter: {name: name, team: team} | orderBy:predicate:!reverse")
+      tr(ng-repeat="player in players | filter: {name: name, team: team} | orderBy:sort.column:sort.descending")
         td
           a(href="#/players/{{player._id}}")
             {{player.name}}
